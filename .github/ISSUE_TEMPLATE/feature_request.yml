@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an idea for this plugin
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your suggestion! Please check the [README](https://github.com/CloudyMountain/dsh-chatgpt-bridge#readme) and existing issues first.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the pain point or use case clearly.
+      placeholder: |
+        e.g. When the Codex quota is exhausted, I'd like to...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should the plugin behave?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds you've tried?

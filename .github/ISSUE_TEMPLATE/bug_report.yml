@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a problem with the plugin
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please check the [README](https://github.com/CloudyMountain/dsh-chatgpt-bridge#readme) first.
+  - type: input
+    id: dsh-version
+    attributes:
+      label: dsh version
+      description: Output of `dsh --version`
+      placeholder: 0.1.0-rc.6
+    validations:
+      required: true
+  - type: input
+    id: codex-version
+    attributes:
+      label: Codex CLI version
+      description: Output of `codex --version`
+      placeholder: 0.147.0
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS / Node version
+      description: e.g. Fedora 44, Node v22.23.1
+      placeholder: Fedora 44 / Node v22
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect to happen, and what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Exact error output
+      description: Paste the exact error text from the tool result or the /chatgpt command result. Redact any personal/sensitive content.
+      render: shell
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: e.g. which command/tool you used, which thread, what you sent
+      placeholder: |
+        1. Opened a new session
+        2. Typed /chatgpt list
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: thread-files
+    attributes:
+      label: Relevant thread files (optional)
+      description: Names of thread files under ~/.dsh/chatgpt-bridge/threads/ involved. Do NOT paste conversation content here unless necessary.
