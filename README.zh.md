@@ -39,17 +39,21 @@ dsh 会话
 npm i -g @openai/codex
 codex login                # 无头机用 codex login --device-auth
 
-# 2. 拿到插件目录（clone 或复制本仓库）
-git clone https://github.com/CloudyMountain/dsh-chatgpt-bridge
-cd dsh-chatgpt-bridge
+# 2. 拿到插件（npm 是官方分发渠道）
+npm i -g @cloudymountain/dsh-chatgpt-bridge   # 全局装一份，PATH 可用
+#   要接入 dsh 侧更建议用仓库 + 安装器（开发方式）：
+#   git clone https://github.com/CloudyMountain/dsh-chatgpt-bridge
+#   cd dsh-chatgpt-bridge
 
 # 3. 一键安装（链接到 profiles + 注入 patch，幂等、自动备份）
 ./install.sh
-#   或手动：ln -s "$PWD" ~/.dsh/profiles/node_modules/chatgpt-bridge
+#   或手动：
+#   npm install @cloudymountain/dsh-chatgpt-bridge --prefix ~/.dsh/profiles
+#   # 或 symlink：ln -s "$PWD" ~/.dsh/profiles/node_modules/@cloudymountain/dsh-chatgpt-bridge
 #   并在 ~/.dsh/profiles/web/cordis.patch.yml（及 headless）追加：
 #   - insert:
-#       - id: chatgpt-bridge
-#         name: chatgpt-bridge
+#       - id: dsh-chatgpt-bridge
+#         name: @cloudymountain/dsh-chatgpt-bridge
 
 # 4. 重启 dsh web 服务（systemd 用户服务示例）
 systemctl --user restart dsh-web      # 或按你的方式重启 dsh 进程
@@ -112,8 +116,9 @@ systemctl --user restart dsh-web      # 或按你的方式重启 dsh 进程
 ## 卸载
 
 ```bash
-rm ~/.dsh/profiles/node_modules/chatgpt-bridge
-# 删除两个 cordis.patch.yml 里的 chatgpt-bridge insert 块
+rm ~/.dsh/profiles/node_modules/@cloudymountain/dsh-chatgpt-bridge
+rmdir ~/.dsh/profiles/node_modules/@cloudymountain 2>/dev/null || true
+# 删除两个 cordis.patch.yml 里的 dsh-chatgpt-bridge insert 块
 rm -rf ~/.dsh/chatgpt-bridge        # 记忆数据（可选）
 ```
 

@@ -39,18 +39,21 @@ Each round: read the thread history → assemble `[System] + history (newest wit
 npm i -g @openai/codex
 codex login                # on headless machines: codex login --device-auth
 
-# 2. Get the plugin (clone or copy this repo)
-git clone https://github.com/CloudyMountain/dsh-chatgpt-bridge
-cd dsh-chatgpt-bridge
+# 2. Get the plugin (npm is the official distribution channel)
+npm i -g @cloudymountain/dsh-chatgpt-bridge   # install anywhere in PATH
+#    For dsh profile linking, prefer the clone + installer (dev method):
+#    git clone https://github.com/CloudyMountain/dsh-chatgpt-bridge
+#    cd dsh-chatgpt-bridge
 
 # 3. One-shot installer (links into profiles + injects the patch row; idempotent, auto-backup)
 ./install.sh
 #    or manually:
-#   ln -s "$PWD" ~/.dsh/profiles/node_modules/chatgpt-bridge
+#   npm install @cloudymountain/dsh-chatgpt-bridge --prefix ~/.dsh/profiles
+#   #   (or symlink: ln -s "$PWD" ~/.dsh/profiles/node_modules/@cloudymountain/dsh-chatgpt-bridge)
 #   then append to ~/.dsh/profiles/web/cordis.patch.yml (and headless):
 #   - insert:
-#       - id: chatgpt-bridge
-#         name: chatgpt-bridge
+#       - id: dsh-chatgpt-bridge
+#         name: @cloudymountain/dsh-chatgpt-bridge
 
 # 4. Restart the dsh web service (systemd user service example)
 systemctl --user restart dsh-web      # or restart your dsh process your way
@@ -113,8 +116,9 @@ Just tell the agent "ask ChatGPT: …". Thread names accept any text (Chinese in
 ## Uninstall
 
 ```bash
-rm ~/.dsh/profiles/node_modules/chatgpt-bridge
-# remove the chatgpt-bridge insert block from both cordis.patch.yml files
+rm ~/.dsh/profiles/node_modules/@cloudymountain/dsh-chatgpt-bridge
+rmdir ~/.dsh/profiles/node_modules/@cloudymountain 2>/dev/null || true
+# remove the dsh-chatgpt-bridge insert block from both cordis.patch.yml files
 rm -rf ~/.dsh/chatgpt-bridge        # memory data (optional)
 ```
 
